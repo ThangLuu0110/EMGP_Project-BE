@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = process.env.PORT_SERVER || 3001;
+const initAPIRoute = require('./routes/api')
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+//config request body parser
+app.use(express.json()); // Used to parse JSON bodies
+app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
+
+initAPIRoute(app);
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

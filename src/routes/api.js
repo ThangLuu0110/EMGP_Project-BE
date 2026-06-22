@@ -13,7 +13,7 @@ const initAPIRoute = (app) => {
     //Update specific user
     route.post('/employees/update/:empId', APIServices.updateSpecificEmployee);
     //Delete specific user
-    route.delete('/employees/delete/:empId', APIServices.deleteSpecificEmployee);
+    route.delete('/employees/delete', APIServices.deleteSpecificEmployees);
     return app.use('/api/v1/', route)
 }
 

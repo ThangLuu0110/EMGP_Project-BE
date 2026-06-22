@@ -69,13 +69,13 @@ const updateSpecificEmployee= async (req, res) => {
     }
 }
 
-const deleteSpecificEmployee = async (req, res) => {
+const deleteSpecificEmployees = async (req, res) => {
     try {
-        const empId = req.params.empId;
+        const { empIds } = req.body;
         if(!empId){
             throw new Error ('There is no record to delete')
         }
-        const query = 'DELETE FROM Employees WHERE empId = ?';
+        const query = 'DELETE FROM Employees WHERE empId IN (?)';
         const [results] = await connection.query(query, [empId]);
         return res.status(200).json({
             message: 'Successfully deleted',
@@ -87,10 +87,12 @@ const deleteSpecificEmployee = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     getAllEmployees,
     getSpecificEmployees,
     addNewEmployees,
     updateSpecificEmployee,
-    deleteSpecificEmployee
+    deleteSpecificEmployees
 } 
